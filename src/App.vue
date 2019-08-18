@@ -28,6 +28,7 @@ export default {
     "display-results": DisplayResults
   },
   props: {
+    "filteredUsers": Array,
     "searchText": ''
   },
   data() {
@@ -54,6 +55,12 @@ export default {
         this.$emit('termChange', event.target.value);
         console.log(event.target.value);
       },
+      filterUsers(termChange){
+          const regex = new RegExp(termChange, 'gi');
+          return [filteredUsers].push(
+            users.name.match(regex) || users.email.match(regex) 
+          )
+        }
     },
   mounted: function(){
     this.fetchUsers()
